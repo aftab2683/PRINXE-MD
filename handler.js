@@ -7,6 +7,7 @@ import chalk from 'chalk'
 import fetch from 'node-fetch'
 import Pino from 'pino'
 
+
 /**
  * @type {import("@whiskeysockets/baileys")}
  */
@@ -121,51 +122,82 @@ export async function handler(chatUpdate) {
             if (typeof chat !== "object")
                 global.db.data.chats[m.chat] = {}
             if (chat) {
-                if (!("antiDelete" in chat)) chat.antiDelete = true
-                if (!("antiLink" in chat)) chat.antiLink = false
-                if (!("antiSticker" in chat)) chat.antiSticker = false
-                if (!("antiToxic" in chat)) chat.antiToxic = false
-		//if (!('anticall' in chat)) chat.antiCall = false
-                if (!("detect" in chat)) chat.detect = false
-                if (!("getmsg" in chat)) chat.getmsg = true
-                if (!("isBanned" in chat)) chat.isBanned = false
-                if (!("nsfw" in chat)) chat.nsfw = false
-                if (!("sBye" in chat)) chat.sBye = ""
-                if (!("sDemote" in chat)) chat.sDemote = ""
-                if (!("simi" in chat)) chat.simi = false
-                if (!("sPromote" in chat)) chat.sPromote = ""
-                if (!("sWelcome" in chat)) chat.sWelcome = ""
-                if (!("useDocument" in chat)) chat.useDocument = false
-                if (!("viewOnce" in chat)) chat.viewOnce = false
-                if (!("viewStory" in chat)) chat.viewStory = false
-		if (!('antiBotClone' in chat)) chat.antiBotClone = false
-                if (!("welcome" in chat)) chat.welcome = false
-                if (!("chatbot" in chat)) chat.chatbot = false
-                if (!isNumber(chat.expired)) chat.expired = 0
-            } else
-                global.db.data.chats[m.chat] = {
-                    antiDelete: true,
-                    antiLink: false,
-                 //   antiCall: false,
-                    antiSticker: false,
-                    antiToxic: false,
-		    antiBotClone: false,
-                    detect: false,
-                    expired: 0,
-                    getmsg: true,
-                    isBanned: false,
-                    nsfw: false, 
-                    sBye: "",
-                    sDemote: "",
-                    simi: false,
-                    sPromote: "",
-                    sticker: false,
-                    sWelcome: "",
-                    useDocument: false,
-                    viewOnce: false,
-                    viewStory: false,
-                    welcome: false,
-                    chatbot: false
+if (!("antiDelete" in chat)) chat.antiDelete = true
+if (!("antiSticker" in chat)) chat.antiSticker = false
+if (!("antiToxic" in chat)) chat.antiToxic = false
+if (!('antiver' in chat)) chat.antiver = false 
+if (!('anticmds' in chat)) chat.anticmds = false
+if (!('testf' in chat)) chat.testf = false		    
+if (!('antiPorn' in chat)) chat.antiPorn = true         
+if (!('antiLink2' in chat)) chat.antiLink2 = false
+if (!('antiTiktok' in chat)) chat.antiTiktok = false
+if (!('antiYoutube' in chat)) chat.antiYoutube = false
+if (!('antiTelegram' in chat)) chat.antiTelegram = false
+if (!('antiFacebook' in chat)) chat.antiFacebook = false
+if (!('antiInstagram' in chat)) chat.antiInstagram = false
+if (!('antiTwitter' in chat)) chat.antiTwitter = false
+if (!('antiDiscord' in chat)) chat.antiDiscord = false
+if (!('antiThreads' in chat)) chat.antiThreads = false
+if (!('antiTwitch' in chat)) chat.antiTwitch = false
+if (!('antifake' in chat)) chat.antifake = false
+if (!("detect" in chat)) chat.detect = false
+if (!("getmsg" in chat)) chat.getmsg = true
+if (!("isBanned" in chat)) chat.isBanned = false
+if (!("nsfw" in chat)) chat.nsfw = false
+if (!("sBye" in chat)) chat.sBye = ""
+if (!("sDemote" in chat)) chat.sDemote = ""
+if (!("simi" in chat)) chat.simi = false
+if (!("sPromote" in chat)) chat.sPromote = ""
+if (!("sWelcome" in chat)) chat.sWelcome = ""
+if (!("useDocument" in chat)) chat.useDocument = false
+if (!("viewOnce" in chat)) chat.viewOnce = false
+if (!("viewStory" in chat)) chat.viewStory = false
+if (!('antiBotClone' in chat)) chat.antiBotClone = false
+if (!("welcome" in chat)) chat.welcome = false
+if (!("chatbot" in chat)) chat.chatbot = false
+if (!("princechat" in chat)) chat.princechat = false
+if (!isNumber(chat.expired)) chat.expired = 0
+		   
+} else
+		    
+global.db.data.chats[m.chat] = {
+antiDelete: true,
+antiSticker: false,
+antiToxic: false,
+antiver: true,
+antiPorn: true,
+anticmds: false,
+antiLink2: false,
+testf: false,
+antiTiktok: false,
+antiYoutube: false,
+antiTelegram: false,
+antiFacebook: false,
+antiInstagram: false,
+antiTwitter: false,
+antiDiscord: false,
+antiThreads: false,
+antiTwitch: false,
+antifake: false,
+antiBotClone: false,
+detect: false,
+expired: 0,
+getmsg: true,
+isBanned: false,
+nsfw: false, 
+sBye: "",
+sDemote: "",
+simi: false,
+sPromote: "",
+sticker: false,
+sWelcome: "",
+useDocument: false,
+viewOnce: false,
+viewStory: false,
+welcome: false,
+princechat: false,                    
+chatbot: false
+			
                 }
           
               
@@ -178,8 +210,8 @@ export async function handler(chatUpdate) {
 	       // if (!('anticall' in settings)) settings.antiCall = false
                 if (!("restartDB" in settings)) settings.restartDB = 0
                 if (!("status" in settings)) settings.status = 0
-		if (!('solopv' in settings)) settings.solopv = false // el bot responde solo por dm
-                if (!('sologp' in settings)) settings.sologp = false // el bot responde solo en grupos
+		///if (!('pconly' in settings)) settings.pconly = false // The bot responds only for dm
+                //if (!('gconly' in settings)) settings.gconly = false // The bot responds only in groups
 
             } else global.db.data.settings[this.user.jid] = {
                 self: false,
@@ -195,15 +227,28 @@ export async function handler(chatUpdate) {
             console.error(e)
         }
         if (opts["nyimak"]) return
-        //if (opts["pconly"] && m.chat.endsWith("g.us")) return
-        //if (opts["gconly"] && !m.chat.endsWith("g.us")) return
-	if (settings.solopv && m.chat.endsWith('g.us')) return  
-        if (settings.sologp && !m.chat.endsWith('g.us')) return
-	//if (m.chat !== '120363032639627036@g.us') return
-       // if (m.chat === '120363032639627036@g.us' && m.sender !== '923092668108@s.whatsapp.net') return;
+	if (!m.fromMe && opts['self'])  return
+        if (opts["pconly"] && m.chat.endsWith("g.us")) return
+        if (opts["gconly"] && !m.chat.endsWith("g.us")) return 
         if (opts["swonly"] && m.chat !== "status@broadcast") return
         if (typeof m.text !== "string")
             m.text = ""
+const Online = !(typeof process.env.AlwaysOnline === 'undefined' || process.env.AlwaysOnline.toLowerCase() === 'false'); 
+if (Online) { conn.sendPresenceUpdate('available', m.chat); } else { conn.sendPresenceUpdate('unavailable', m.chat);}    
+
+	    
+	   /* const specificGroup = '120363032639627036@g.us';
+const allowedSender = '923092668108@s.whatsapp.net';
+if (m.chat === specificGroup && m.sender !== allowedSender) {
+	return;
+}*/
+
+       // if (settings.pconly && m.chat.endsWith('g.us')) return  
+      // if (settings.gconly && !m.chat.endsWith('g.us')) return 
+        
+	//if (m.chat !== '120363032639627036@g.us') return
+       // if (m.chat === '120363032639627036@g.us' && m.sender !== '923092668108@s.whatsapp.net') return;
+
 
         const isROwner = [conn.decodeJid(global.conn.user.id), ...global.owner.map(([number]) => number)].map(v => v.replace(/[^0-9]/g, "") + "@s.whatsapp.net").includes(m.sender)
         const isOwner = isROwner || m.fromMe
@@ -340,7 +385,13 @@ export async function handler(chatUpdate) {
                     let user = global.db.data.users[m.sender]
                     if (!['owner-unbanchat.js'].includes(name) && chat && chat.isBanned && !isROwner) return // Except this
                     if (name != 'owner-unbanchat.js' && name != 'owner-exec.js' && name != 'owner-exec2.js' && name != 'tool-delete.js' && chat?.isBanned && !isROwner) return
-                }
+                    if (m.text && user.banned && !isROwner) {
+		       if (user.antispam > 2) return
+m.reply(`🚫 *YOU ARE BANNED, YOU CAN'T USE THE COMMANDS*\n📑 *REASON: ${user.messageSpam === 0 ? 'UNSPECIFIED' : user.messageSpam}*\n⚠️ \`\`\`IF THIS BOT IS AN OFFICIAL ACCOUNT AND HAS EVIDENCE TO SUPPORT THAT THIS MESSAGE IS AN ERROR, YOU CAN MAKE YOUR CASE AT:\`\`\`👉 ${owner}`)
+user.antispam++	
+return 
+		    }
+		}
                 if (plugin.rowner && plugin.owner && !(isROwner || isOwner)) { // Both Owner
                     fail("owner", m, this)
                     continue
@@ -508,25 +559,26 @@ if (process.env.AUTOREAD === 'true') {
         await conn.readMessages([m.key]);
     } catch (error) {
     }
-}
-	    
-if (typeof process.env.STATUSVIEW === 'undefined' || process.env.STATUSVIEW.toLowerCase() === 'false') return;
-if (m.key.remoteJid === 'status@broadcast')
-	await conn.readMessages([m.key])
-//if (settingsREAD.autoread2) await this.readMessages([m.key])  
-//if (settingsREAD.autoread2 == 'true') await this.readMessages([m.key]) 
- 
-    }
-	    
+}	    
+ // STATUSVIEW 
+//if (typeof process.env.STATUSVIEW !== 'undefined' && process.env.STATUSVIEW.toLowerCase() === 'true') { if (m.key.remoteJid === 'status@broadcast') { await conn.readMessages([m.key]); } }
+if (typeof process.env.STATUSVIEW !== 'undefined' && process.env.STATUSVIEW.toLowerCase() === 'true') { if (m.key.remoteJid === 'status@broadcast') { await conn.readMessages([m.key]); const prince = ['😀', '😃', '😄', '😁', '😊', '😇', '🙂', '🙃', '😍', '🥰', '😘', '😗', '😙', '😚', '😋', '🤑', '💌', '💘', '💝', '💖', '💗', '💓', '💞', '💕', '💟', '❣️', '💔', '❤️', '🧡', '💛', '💚', '💙', '💜', '🤎', '🖤', '🤍', '💯', '💥', '💫']; const randomEmoji = prince[Math.floor(Math.random() * prince.length)]; const msg = m; const me = await conn.decodeJid(conn.user.id); await conn.sendMessage(msg.key.remoteJid, { react: { key: msg.key, text: randomEmoji } }, { statusJidList: [msg.key.participant, me] }); } }
 
+
+
+	    
+	    
 if (typeof process.env.AutoReaction === 'undefined' || process.env.AutoReaction.toLowerCase() === 'false') return;
 if (m.text.match(/(prince|a|e|i|o|u|g|q|ا|م|dad|gds|oso|love|mente|pero|tion|age|sweet|kiss|cute|ate|and|but|ify)/gi)) {
-let emot = pickRandom(["☺️", "😻", "😘", "🥰", "😱", "🤗", "🤫", "😚", "🤭", "☺️", "✨", "🎉", "💗", "♥️", "👑", "😚", "💞", "💖", "💓", "⚡️", "🌝", "🍓", "🍎", "🎈", "🪄", "❤️", "🧡", "💛", "💚", "💙", "💜", "🖤", "🤍", "💟", "🌝", "😎", "😍", "🕊️", "🥀", "🦋", "🐣", "❤‍🩹", "♥️", "😒", "🌸", "🌈", "❣️", "✨", "🙌", "👻", "👑", "🐤", "🪽", "🌙", "💫", "🪐", "☀️", "🌪️", "🧸", "🎀", "🎉", "🪞", "🖇️", "📎", "🩷", "🖤", "🤍", "🤎", "💛", "💚", "🩵", "💙", "💜", "💟", "💓", "🩶", "😑", "😶"])
-this.sendMessage(m.chat, { react: { text: emot, key: m.key }})}
-function pickRandom(list) { return list[Math.floor(Math.random() * list.length)]}
+    let emot = (m.sender === '923092668108@s.whatsapp.net') ? "👑" : pickRandom(["☺️", "😻", "🥰", "😱", "🤗", "🤫", "🤭", "☺️", "✨", "🎉", "💗", "♥️", "👑", "💞", "💖", "💓", "⚡️", "🌝", "🍓", "🍎", "🎈", "🪄", "❤️", "🧡", "💛", "💚", "💙", "💜", "🖤", "🤍", "💟", "🌝", "😎", "😍", "🕊️", "🥀", "🦋", "🐣", "❤‍🩹", "♥️", "😒", "🌸", "🌈", "❣️", "✨", "🙌", "👻", "🐤", "🪽", "🌙", "💫", "☀️", "🧸", "🎀", "🎉", "🩷", "🖤", "🤍", "🤎", "💛", "💚", "🩵", "💙", "💜", "💟", "💓", "🩶", "😑", "😶"]);
+    this.sendMessage(m.chat, { react: { text: emot, key: m.key } });
+}
 
-	    
-    }
+function pickRandom(list) { return list[Math.floor(Math.random() * list.length)]; }
+
+
+
+}}
     
             
 
@@ -744,36 +796,36 @@ export async function groupsUpdate(groupsUpdate) {
 /**
 Delete Chat
  */
+
 export async function deleteUpdate(message) {
     try {
-           
-       
-      if (typeof process.env.antidelete === 'undefined' || process.env.antidelete.toLowerCase() === 'false') return;
+        if (typeof process.env.antidelete === 'undefined' || process.env.antidelete.toLowerCase() === 'false') return;
 
+        const { fromMe, id, participant } = message;
+        if (fromMe) return;
+        let msg = this.serializeM(this.loadMessage(id));
+        if (!msg) return;
+        let chat = global.db.data.chats[msg.chat] || {};
 
-        const {
-            fromMe,
-            id,
-            participant
-        } = message
-        if (fromMe)
-            return
-        let msg = this.serializeM(this.loadMessage(id))
-        if (!msg)
-            return
-        let chat = global.db.data.chats[msg.chat] || {}
-       
-            await this.reply(conn.user.id, ` 
-            *Number :* @${participant.split`@`[0]} 
-            👀ʜᴀs ᴅᴇʟᴇᴛᴇᴅ ᴀ ᴍᴇssᴀɢᴇ ʙᴇʟᴏᴡ👇🏻
-            `.trim(), msg, {
-                        mentions: [participant]
-                    })
-        this.copyNForward(conn.user.id, msg, false).catch(e => console.log(e, msg))
+        await this.reply(
+            conn.user.id, 
+            `
+            🚨 *Message Deleted Alert!* 🚨
+            
+            📲 *Number:* @${participant.split`@`[0]}  
+            ✋ *Message Deleted Below:* 👇  
+
+            📌 Stay vigilant! 😎
+            `.trim(), 
+            msg, 
+            { mentions: [participant] }
+        );
+        this.copyNForward(conn.user.id, msg, false).catch(e => console.log(e, msg));
     } catch (e) {
-        console.error(e)
+        console.error(e);
     }
 }
+
 
 /*
  Polling Update 
